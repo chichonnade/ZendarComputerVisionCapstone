@@ -1,5 +1,3 @@
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
@@ -7,29 +5,19 @@ import cv2
 import sklearn
 from sklearn.datasets import make_blobs
 
-
-
 def get_output_layers(net):
     layer_names = net.getLayerNames()
     try:
         output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
     except:
         output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-
     return output_layers
-
 
 def draw_prediction(img, class_id, confidence, x, y, x_plus_w, y_plus_h, classes, COLORS):
     label = str(classes[class_id])
-
     color = COLORS[class_id]
-
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), color, 2)
-
     cv2.putText(img, label, (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-
-
-
 
 def run_yolo(img, cfg_path, class_path, weights_path):
 
@@ -48,7 +36,6 @@ def run_yolo(img, cfg_path, class_path, weights_path):
     # Config
     net = cv2.dnn.readNet(weights_path, config_path)
 
-
     # Results
     labeled_images = []
     image_boxes_np = []
@@ -59,23 +46,18 @@ def run_yolo(img, cfg_path, class_path, weights_path):
     # Pass Image
     image = img
 
-
     # Blob
     Width = image.shape[1]
     Height = image.shape[0]
     scale = 0.00392
     blob = cv2.dnn.blobFromImage(image, scale, (416, 416), (0, 0, 0), True, crop=False)
-
     net.setInput(blob)
-
     outs = net.forward(get_output_layers(net))
-
     class_ids = []
     confidences = []
     boxes = []
     conf_threshold = 0.5
     nms_threshold = 0.4
-
 
     for out in outs:
         for detection in out:
@@ -92,7 +74,6 @@ def run_yolo(img, cfg_path, class_path, weights_path):
                 class_ids.append(class_id)
                 confidences.append(float(confidence))
                 boxes.append([x, y, w, h])
-
     indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
 
     for i in indices:
@@ -101,19 +82,15 @@ def run_yolo(img, cfg_path, class_path, weights_path):
         except:
             i = i[0]
             box = boxes[i]
-
         x = box[0]
         y = box[1]
         w = box[2]
         h = box[3]
-
         box_dict = []
         box_dict.append(x)
         box_dict.append(y)
         box_dict.append(x+w)
         box_dict.append(y+h)
-
-
 
         # Remove Classes that are not
         if class_ids[i] == 0 or class_ids[i] == 2 or class_ids[i] == 5 or class_ids[i] == 7:
@@ -121,13 +98,7 @@ def run_yolo(img, cfg_path, class_path, weights_path):
              box_coordinates.append(box_dict)
              class_ids_filt.append(class_ids[i])
 
-
-
-    #image_boxes_np.append(box_coordinates)
     labeled_images.append(image)
-    #image_boxes_np.append(box_coordinates)
-
-
     image_boxes_np = np.array(image_boxes_np, dtype=object)
 
     return labeled_images, box_coordinates,COLORS,class_ids_filt,classes
