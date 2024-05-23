@@ -14,13 +14,6 @@ def run_cluster(X_radar):
     ax.scatter(X_radar[:,0], X_radar[:,1], X_radar[:,2])
     plt.show()
 
-    ## Sample Data
-    # X = np.array([[1, 2], [2, 2], [2, 3],[8, 7], [8, 8], [25, 80]])
-    #centers = [[1, 1], [-1, -1], [1, -1]]
-    #X, labels_true = make_blobs(n_samples=750, centers=centers, cluster_std=0.4, random_state=0)
-    #plt.scatter(X[:, 0], X[:, 1])
-    #plt.show()
-
     X = X_radar
     db = DBSCAN(eps=0.3, min_samples=10).fit(X)
     core_samples = db.core_sample_indices_
@@ -28,12 +21,9 @@ def run_cluster(X_radar):
     n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
     clusters = [X[labels == i] for i in range(n_clusters_)]
     outliers = X[labels == -1]
-
-
     unique_labels = set(labels)
     core_samples_mask = np.zeros_like(labels, dtype=bool)
     core_samples_mask[db.core_sample_indices_] = True
-
     colors = [plt.cm.Spectral(each) for each in np.linspace(0, 1, len(unique_labels))]
 
     for k, col in zip(unique_labels, colors):
@@ -42,10 +32,8 @@ def run_cluster(X_radar):
             col = [0, 0, 0, 1]
 
         class_member_mask = labels == k
-
         xy = X[class_member_mask & core_samples_mask]
         plt.plot(xy[:, 0], xy[:, 1], "o", markerfacecolor=tuple(col), markeredgecolor="k", markersize=14,)
-
         xy = X[class_member_mask & ~core_samples_mask]
         plt.plot(xy[:, 0], xy[:, 1], "o", markerfacecolor=tuple(col), markeredgecolor="k", markersize=6,)
 
@@ -74,26 +62,22 @@ def run_cluster_2(data):
 
 def run_cluster_3(data):
     # Assuming all_camera is a dictionary with keys 'ZRVE1001', 'ZRVE1002', 'ZRVC2001'
-
-    X = data
-
-    # Grid search for best parameters
+    # Grid search for best hyperparameters
     eps_values = np.arange(0.1, 5, 0.2)  # Adjust the range and step as needed
     min_samples_values = range(2, 6)  # Adjust the range and step as needed
-
     best_score = -1
     best_eps = None
     best_min_samples = None
+    X = data
 
     for eps in eps_values:
         for min_samples in min_samples_values:
             db = DBSCAN(eps=eps, min_samples=min_samples).fit(X)
             labels = db.labels_
-
             n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
             if n_clusters_ == 0:
                 continue
-
+            #compute silhouette score for the current hyperparameters
             silhouette_score = metrics.silhouette_score(X, labels)
             if silhouette_score > best_score:
                 best_score = silhouette_score
@@ -103,30 +87,23 @@ def run_cluster_3(data):
     # Using the best parameters
     db = DBSCAN(eps=best_eps, min_samples=best_min_samples).fit(X)
     labels = db.labels_
-
     print(f"Silhouette Coefficient: {best_score:.3f}")
     print(f"Best eps: {best_eps}")
     print(f"Best min_samples: {best_min_samples}")
-
     n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise_ = list(labels).count(-1)
-
     print("Estimated number of clusters: %d" % n_clusters_)
     print("Estimated number of noise points: %d" % n_noise_)
 
-
-    ## Plotting:
-    #points = X
+    ## Plotting
     fig = plt.figure(figsize=(20, 20))
     ax = fig.add_subplot(111, projection='3d')
-
 
     ## Filter Points out that are not in image
     points = data
     filtered_indices = np.where((0 < points[:, 0]) & (points[:, 0] < 1616) & (0 < points[:, 1]) & (points[:, 1] < 1240))
     filtered_points = points[filtered_indices]
     filtered_labels = np.array(labels)[filtered_indices]
-
     unique_labels = set(np.array(labels))
     colors = plt.cm.Spectral(np.linspace(0, 1, len(unique_labels)))
 
@@ -134,11 +111,9 @@ def run_cluster_3(data):
     for label, col in zip(unique_labels, colors):
         if label == -1:
             continue
-
         cluster_points = points[np.array(labels) == label, :]
         x, y, z = cluster_points[:, 0], cluster_points[:, 1], cluster_points[:, 2]
         cluster_dict.append([x, y, z])
-
         ax.scatter(x, y, z, c=[col], label=f'Cluster {label}', alpha=0.8)
 
     ax.set_xlabel('X-axis')
@@ -147,12 +122,8 @@ def run_cluster_3(data):
     plt.title('3D Points by Clusters (excluding noise)')
 
     ax.view_init(elev=35, azim=90)
-    # ax = plt.gca()
-    # ax.invert_yaxis()
     ax.set_xlim(-20, 20)
     ax.set_ylim(-10, 10)
     ax.set_zlim(20, 80)
-
-    #plt.show()
 
     return points,unique_labels,labels,cluster_dict
