@@ -50,23 +50,23 @@ This project focuses on detecting 3D space objects using radar point cloud and i
 
 1. **Clone the repository**:
 
-   ```sh
+```sh
   git clone https://github.com/yourusername/ZendarComputerVisionCapstone.git
   cd ZendarComputerVisionCapstone
-   ```
+```
 
 2. **Set up the virtual environment**:
 
-   ```sh
+```sh
    python3 -m venv venv
    source venv/bin/activate  # On Windows use \`venv\Scripts\activate\`
-   ```
+```
 
 3. **Install the dependencies**:
 
-   ```sh
+```sh
    pip install -r requirements.txt
-   ```
+```
 
 ### Directory Details
 
