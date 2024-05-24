@@ -1,6 +1,154 @@
-# ZendarObjectDetectionCapstone
 
+# Radar Image Space Object Detection
 
-weights:
-https://drive.google.com/drive/folders/1lt509Fj3OwNyOelpzV1umR8321ioelLp?usp=sharing
+## Overview
 
+This project focuses on detecting 3D space objects using radar point cloud and images. The detection pipeline includes the use of YOLO for object detection and classification in the image space and DBSCAN for clustering and detecting objects in the radar space.
+
+## Project Structure
+
+\`\`\`
+├── DBscan
+│   ├── run_dbscan.py
+├── Yolo and undistortion
+│   ├── yolo_opencv.py
+│   ├── yolov3.cfg
+│   ├── yolov3.txt
+├── data
+│   ├── 00000.npz
+│   ├── extrinsics_intrinsics.npz
+├── src
+│   ├── camera_to_image.py
+│   ├── radar_to_camera.py
+│   ├── radar_to_image.py
+│   ├── threeD_2D_table.py
+│   ├── utils.py
+│   ├── data
+│   │   ├── dataset.py
+│   │   ├── load.py
+│   ├── model
+│   │   ├── merge.py
+│   │   ├── yolo.py
+├── yolo_setup
+│   ├── yolov3.cfg
+│   ├── yolov3.txt
+├── .gitignore
+├── DataViz-v2.ipynb
+├── README.md
+├── requirements.txt
+├── run.py
+\`\`\`
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.9 or higher
+- Virtual environment tools (e.g., \`venv\`)
+
+### Installation
+
+1. **Clone the repository**:
+
+   \`\`\`sh
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
+   \`\`\`
+
+2. **Set up the virtual environment**:
+
+   \`\`\`sh
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use \`venv\Scripts\activate\`
+   \`\`\`
+
+3. **Install the dependencies**:
+
+   \`\`\`sh
+   pip install -r requirements.txt
+   \`\`\`
+
+### Directory Details
+
+#### \`DBscan\`
+
+- \`run_dbscan.py\`: Script that implements the DBSCAN clustering algorithm for identifying clusters in the radar data.
+
+#### \`Yolo and undistortion\`
+
+- \`yolo_opencv.py\`: Script for running YOLO object detection with OpenCV integration.
+- \`yolov3.cfg\`: Configuration file for YOLOv3.
+- \`yolov3.txt\`: Text file containing class labels for YOLOv3.
+
+#### \`data\`
+
+- \`00000.npz\`: Sample data for visualization.
+- \`extrinsics_intrinsics.npz\`: File containing extrinsic and intrinsic parameters for the sensors.
+
+#### \`src\`
+
+- \`camera_to_image.py\`: Script to convert camera data to image format.
+- \`radar_to_camera.py\`: Script to map radar data to camera coordinates.
+- \`radar_to_image.py\`: Script to convert radar data to image format.
+- \`threeD_2D_table.py\`: Script for 3D to 2D lookup table functions.
+- \`utils.py\`: Utility functions for various tasks.
+
+##### \`src/data\`
+
+- \`dataset.py\`: Script for handling datasets and data projection.
+- \`load.py\`: Script for loading and preprocessing data.
+
+##### \`src/model\`
+
+- \`merge.py\`: Script for merging detected objects.
+- \`yolo.py\`: Script for running YOLO object detection.
+
+#### \`yolo_setup\`
+
+- \`yolov3.cfg\`: Configuration file for setting up YOLOv3.
+- \`yolov3.txt\`: Text file containing class labels for YOLOv3.
+
+### Usage
+
+1. **Data Preprocessing**:
+
+   Use the scripts in the \`src/data\` directory to preprocess your radar images.
+
+2. **Object Detection with YOLO**:
+
+   Set up YOLO using the files in the \`yolo_setup\` directory and run the detection scripts from \`Yolo and undistortion\`.
+
+3. **Clustering with DBSCAN**:
+
+   Run the \`run_dbscan.py\` script located in the \`DBscan\` directory to perform clustering on the detected objects.
+
+4. **Visualization**:
+
+   Use the \`DataViz-v2.ipynb\` notebook to visualize the results and gain insights into the detection and clustering performance.
+
+### Example
+
+To run the YOLO detection followed by DBSCAN clustering, use the following commands:
+
+\`\`\`sh
+python src/yolo_setup/yolo_detection.py
+python DBscan/run_dbscan.py
+\`\`\`
+
+### Contributing
+
+If you would like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (\`git checkout -b feature/your-feature\`).
+3. Commit your changes (\`git commit -m 'Add some feature'\`).
+4. Push to the branch (\`git push origin feature/your-feature\`).
+5. Open a pull request.
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Contact
+
+For any inquiries or questions, please open an issue or contact [your-email@example.com].
