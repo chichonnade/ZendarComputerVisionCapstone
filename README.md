@@ -32,6 +32,7 @@ This project focuses on detecting 3D space objects using radar point cloud and i
 ├── yolo_setup
 │   ├── yolov3.cfg
 │   ├── yolov3.txt
+│   ├── yolov3.weights
 ├── .gitignore
 ├── DataViz-v2.ipynb
 ├── README.md
@@ -107,8 +108,21 @@ This project focuses on detecting 3D space objects using radar point cloud and i
 
 - `yolov3.cfg`: Configuration file for setting up YOLOv3.
 - `yolov3.txt`: Text file containing class labels for YOLOv3.
+- `yolov3.weights`: download from [here](https://pjreddie.com/media/files/yolov3.weights)
 
-### Usage
+### Running the Script
+
+1. **Download the YOLOv3 weights**
+
+Download the weights from [here](https://pjreddie.com/media/files/yolov3.weights) and place them in the `yolo_setup` directory.
+
+2. **Run the main script**:
+
+```sh
+   python run.py
+```
+
+### Detailed usage
 
 1. **Data Preprocessing**:
 
