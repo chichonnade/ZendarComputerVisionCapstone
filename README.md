@@ -5,14 +5,22 @@
 
 This project focuses on detecting 3D space objects using radar point cloud and images. The detection pipeline combines YOLO for classification in the image space and DBSCAN for clustering and detecting objects in the radar space. The project aims to merge the detected objects from both modalities to provide a comprehensive view of the environment.
 
-```
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Xsco6qeIno4" frameborder="0" allowfullscreen></iframe>
-Video demonstration
-```
+## Video Demonstration
+
+| | |
+| --- | --- |
+| [![Video 1](https://img.youtube.com/vi/Xsco6qeIno4/0.jpg)](https://www.youtube.com/watch?v=Xsco6qeIno4) | |
+| ![Example Image](assets/image1.jpg) | |
+| ![Example Image](assets/image2.jpg) | ![Example Image](assets/image3.jpg) |
+
 
 ## Project Structure
 
 ```plaintext
+├── assets
+│   ├── image1.png
+│   ├── image2.png
+│   ├── image3.png
 ├── DBscan
 │   ├── run_dbscan.py
 ├── Yolo and undistortion
