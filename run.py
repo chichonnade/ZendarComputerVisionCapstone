@@ -26,12 +26,12 @@ MID_RADAR = 'ZRVC2001'
 RIGHT_RADAR = 'ZRVE1001'
 
 # Data and model weights location
-filepath = 'data/00000.npz'
+filepath = 'data/00049.npz'
 sensor_prop_path = 'data/extrinsics_intrinsics.npz'
 yolo_cfg_path = 'yolo_setup/yolov3.cfg'
 yolo_class_path = 'yolo_setup/yolov3.txt'
 yolo_weights_path = 'yolo_setup/yolov3.weights'
-labeled_image = 'data/00000.npz_object-detection.jpg'
+labeled_image = 'data/00118.npz_object-detection.jpg'
 
 # Check if the YOLO files exist
 if not os.path.exists(yolo_cfg_path):
