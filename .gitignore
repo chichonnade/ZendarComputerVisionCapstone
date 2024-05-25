@@ -1,3 +1,4 @@
 .ipynb_checkpoints
 venv/
 __pycache__/
+yolo_setup/yolov3.weights

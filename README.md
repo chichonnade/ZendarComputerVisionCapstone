@@ -3,7 +3,12 @@
 
 ## Overview
 
-This project focuses on detecting 3D space objects using radar point cloud and images. The detection pipeline includes the use of YOLO for object detection and classification in the image space and DBSCAN for clustering and detecting objects in the radar space.
+This project focuses on detecting 3D space objects using radar point cloud and images. The detection pipeline combines YOLO for classification in the image space and DBSCAN for clustering and detecting objects in the radar space. The project aims to merge the detected objects from both modalities to provide a comprehensive view of the environment.
+
+```
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Xsco6qeIno4" frameborder="0" allowfullscreen></iframe>
+Video demonstration
+```
 
 ## Project Structure
 
