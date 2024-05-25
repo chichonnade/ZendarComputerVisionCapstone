@@ -164,10 +164,6 @@ Download the weights from [here](https://pjreddie.com/media/files/yolov3.weights
 
    Use the `DataViz.ipynb` notebook to visualize the results and gain insights into the detection and clustering performance.
 
-### License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ### Contact
 
 For any inquiries or questions, please open an issue or contact [hendrikchiche@gmail.com].
