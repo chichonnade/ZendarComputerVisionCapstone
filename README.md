@@ -9,12 +9,22 @@ This project focuses on detecting 3D space objects using radar point cloud and i
 
 ## Video Demonstration
 
-<!-- Video Section -->
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=Xsco6qeIno4">
-    <img src="https://img.youtube.com/vi/Xsco6qeIno4/0.jpg" alt="Video 1">
-  </a>
+  <img src="https://github.com/chichonnade/ZendarComputerVisionCapstone/assets/AutomaticRadarLabelingDemo.gif?v=1" width="600" height="200" />
 </p>
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/chichonnade/ZendarComputerVisionCapstone/assets/AutomaticRadarLabelingDemo.gif?v=1" width="600" height="200" />
+    </td>
+    <td style="vertical-align: middle; text-align: left; padding-left: 20px;">
+      <span style="font-size: 16px;">
+        <br />
+      </span>
+    </td>
+  </tr>
+</table>
 
 ## Samples
 
