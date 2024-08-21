@@ -5,9 +5,7 @@
 
 This project focuses on detecting 3D space objects using radar point cloud and images. The detection pipeline combines YOLO for classification in the image space and DBSCAN for clustering and detecting objects in the radar space. The project aims to merge the detected objects from both modalities to provide a comprehensive view of the environment.
 
-![Example Image](assets/image1.png)
-
-## Video Demonstration
+## Demo
 
 <p align="center">
   <img src="https://github.com/chichonnade/ZendarComputerVisionCapstone/blob/main/assets/AutomaticRadarLabelingDemo.gif?v=1" width="900" height="400"/>
@@ -21,6 +19,9 @@ This project focuses on detecting 3D space objects using radar point cloud and i
   <img src="assets/image3.png" alt="Example Image" />
 </p>
 
+## Pipeline overview
+
+![Example Image](assets/image1.png)
 
 ## Project Structure
 
